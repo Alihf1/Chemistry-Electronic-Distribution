@@ -1,0 +1,794 @@
+
+/*
+ * © 2026 TECHNOLOGY.ALI - جميع الحقوق محفوظة.
+ */
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------------------------------------------------- */
+/* التعديل المطلوب: جعل منطقة النتائج في جهة اليسار ومحاذاة LTR */
+/* ---------------------------------------------------------------- */
+#result, #additional-result, #compare-results {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    /* الخطوة 1: تحديد الاتجاه من اليسار لليمين */
+    direction: ltr; 
+    /* الخطوة 2: محاذاة النص والـ Inline Content لليسار */
+    text-align: left; 
+}
+
+/* تحديد محاذاة عناوين النتائج لتبقى في اليسار */
+#result h2, #additional-result h2, #compare-results h3 {
+    text-align: left;
+    /* إعادة توجيه العنوان في حال كان التأثير قوياً من اتجاه الصفحة RTL */
+    direction: ltr; 
+}
+
+/* ---------------------------------------------------------------- */
+/* تعديل طريقة المربعات لتظهر من اليسار لليمين بشكل صحيح */
+/* ---------------------------------------------------------------- */
+.diagram-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    /* تحديد اتجاه الحاوية لتبدأ من اليسار */
+    direction: ltr; 
+    text-align: left;
+}
+
+.orbital-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* للتأكد من أن الصف يبدأ من اليسار */
+    direction: ltr; 
+}
+
+.orbital-label {
+    font-weight: bold;
+    min-width: 40px; /* لضمان محاذاة متناسقة */
+    text-align: right; /* لجعل التسمية (1s, 2s) قريبة من المربعات */
+    padding-right: 5px;
+}
+
+.orbital-box {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    font-family: monospace;
+    background-color: #fff;
+    border-radius: 3px;
+    /* Arrows must be LTR */
+    direction: ltr; 
+}
+
+/* باقي أكواد CSS الأصلية */
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+.info-icon {
+    cursor: pointer;
+    color: #007bff;
+    font-size: 1.2em;
+    margin-right: 5px;
+}
+
+.info-box {
+    border: 1px solid #007bff;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #eaf3ff;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+input[type="number"], input[type="text"], button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    direction: rtl; /* الإدخالات تبقى RTL لأنها باللغة العربية */
+    text-align: right;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+/* ---------------------------------------------------------------- */
+/* أنماط الجدول الدوري (لا تحتاج لتغيير اتجاه العرض) */
+/* ---------------------------------------------------------------- */
+#periodic-table-container {
+    margin-top: 30px;
+    overflow-x: auto;
+}
+
+#periodic-table {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    gap: 2px;
+    font-size: 0.7em;
+    /* يبدأ من اليمين لليسار */
+    direction: rtl; 
+}
+
+.element {
+    border: 1px solid #333;
+    padding: 2px;
+    height: 65px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.element:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.element span {
+    font-size: 0.9em;
+    align-self: flex-start;
+    margin-right: 2px;
+}
+
+.element h3 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.element p {
+    margin: 0;
+    font-size: 0.7em;
+}
+
+/* ألوان المجموعات */
+.alkali-metal { background-color: #ff9999; }
+.alkaline-earth-metal { background-color: #ffcc99; }
+.transition-metal { background-color: #ffff99; }
+.post-transition-metal { background-color: #c0ffc0; }
+.metalloid { background-color: #cce0ff; }
+.nonmetal { background-color: #99ffcc; }
+.halogen { background-color: #cc99ff; }
+.noble-gas { background-color: #99ccff; }
+.lanthanide { background-color: #ffb3ff; }
+.actinide { background-color: #ffccff; }
+.empty {
+    visibility: hidden;
+    /* لضمان الحفاظ على حجم الخلية الفارغة */
+    height: 0; 
+}
+.empty-span-10 { grid-column: span 10; }
+.empty-span-16 { grid-column: span 16; }
+.empty-span-1 { grid-column: span 1; }
+.empty-span-2 { grid-column: span 2; }
+
+
+/* ---------------------------------------------------------------- */
+/* أنماط نافذة Modal (لا تحتاج لتغيير اتجاه العرض) */
+/* ---------------------------------------------------------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 80%;
+    width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    /* للحفاظ على اتجاه Modal RTL */
+    direction: rtl; 
+    text-align: right;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+/* ---------------------------------------------------------------- */
+/* أنماط وضع الاختبار (Quiz Mode) */
+/* ---------------------------------------------------------------- */
+.quiz-mode-toggle {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.hidden-quiz {
+    display: none;
+    background-color: #fff0f0;
+    border: 2px dashed #ff6666;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+#quiz-area {
+    /* للحفاظ على اتجاه منطقة الاختبار RTL */
+    direction: rtl;
+    text-align: right;
+}
+
+/* ---------------------------------------------------------------- */
+/* أنماط رمز لويس */
+/* ---------------------------------------------------------------- */
+
+.lewis-dot-container {
+    display: inline-flex;
+    position: relative;
+    margin: 10px;
+    border: 1px dashed #777;
+    padding: 10px 20px;
+    border-radius: 5px;
+    direction: ltr; /* لضمان ظهور الرمز في المنتصف والنقاط حوله بشكل صحيح */
+}
+
+.lewis-symbol {
+    font-size: 2em;
+    font-weight: bold;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+}
+
+.dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.dot-top-1 { top: 5px; left: 50%; transform: translateX(-50%); }
+.dot-top-2 { top: 5px; left: calc(50% + 5px); transform: translateX(-50%); }
+
+.dot-bottom-1 { bottom: 5px; left: 50%; transform: translateX(-50%); }
+.dot-bottom-2 { bottom: 5px; left: calc(50% + 5px); transform: translateX(-50%); }
+
+.dot-right-1 { right: 5px; top: 50%; transform: translateY(-50%); }
+.dot-right-2 { right: 5px; top: calc(50% + 5px); transform: translateY(-50%); }
+
+.dot-left-1 { left: 5px; top: 50%; transform: translateY(-50%); }
+.dot-left-2 { left: 5px; top: calc(50% + 5px); transform: translateY(-50%); }
+
+/* ---------------------------------------------------------------- */
+/* Media Queries للتجاوبية */
+/* ---------------------------------------------------------------- */
+@media (max-width: 600px) {
+    .container {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    #periodic-table {
+        font-size: 0.5em;
+    }
+
+    .element {
+        height: 50px;
+    }
+
+    .orbital-box {
+        width: 25px;
+        height: 25px;
+        font-size: 1em;
+    }
+
+
+}
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #c4dcff; /* لون خلفية فاتح */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    direction: rtl; /* تم الإبقاء على RTL */
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box; /* لضمان عدم تجاوز العناصر للحجم الكلي */
+}
+
+.container {
+    background: rgb(252, 255, 164);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    width: 98%;
+    max-width: 1400px; /* زيادة أقصى عرض للجدول الكامل */
+    direction: rtl; /* تم الإبقاء على RTL */
+}
+
+h1, h2 {
+    color: #212529; /* لون داكن للعناوين */
+    margin-bottom: 15px;
+}
+
+p {
+    color: #495057;
+}
+
+/* نمط الإدخال والأزرار (متبقي كما هو) */
+#atomicNumberInput, #electronConfigInput, #compareInput1, #compareInput2 {
+    width: calc(100% - 22px);
+    padding: 12px;
+    margin: 15px 0 10px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    text-align: right; /* محاذاة لليمين في RTL */
+    font-size: 1em;
+    direction: ltr; /* لجعل الأرقام والرموز تبدو طبيعية */
+}
+#compareInput1, #compareInput2 {
+    width: 48%; /* تقسيم العرض لأداة المقارنة */
+    display: inline-block;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.05em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* نمط الجدول الدوري (متبقي كما هو) */
+#periodic-table-container {
+    margin-top: 30px;
+    overflow-x: auto; /* يسمح بالتمرير الأفقي إذا كان الجدول أكبر من الشاشة */
+    padding-bottom: 10px; /* مسافة للتمرير الأفقي */
+}
+
+#periodic-table {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr); /* 18 عمود للجدول الدوري */
+    gap: 4px; /* تقليل المسافة بين العناصر */
+    min-width: 900px; /* للتأكد من أن الجدول لا يتقلص كثيرًا على الشاشات الصغيرة */
+    direction: ltr; /* لعرض الجدول من اليسار لليمين */
+}
+
+.element {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 5px 3px; /* تقليل البادينغ الداخلي */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em; /* حجم خط أصغر */
+    height: 60px; /* ارتفاع ثابت للعنصر */
+    box-sizing: border-box;
+}
+
+/* الألوان (متبقي كما هو) */
+.alkali-metal { background-color: #ff9999; }
+.alkaline-earth-metal { background-color: #ffcc99; }
+.transition-metal { background-color: #ffff99; }
+.post-transition-metal { background-color: #ccffcc; }
+.metalloid { background-color: #99ff99; }
+.nonmetal { background-color: #99ffcc; }
+.halogen { background-color: #99ffff; }
+.noble-gas { background-color: #ccccff; }
+.lanthanide { background-color: #ffccff; }
+.actinide { background-color: #ff99ff; }
+
+/* أنماط نتائج التوزيع (متبقي كما هو) */
+#result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    text-align: right; /* محاذاة لليمين في RTL */
+    direction: ltr; /* لجعل التوزيع الإلكتروني يظهر بشكل صحيح */
+}
+#result h3, #additional-result h3 {
+    direction: rtl; /* لإرجاع العناوين للغة العربية */
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* لترتيب العنوان والأيقونة لليمين */
+}
+#result p, #additional-result p {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #007bff;
+    direction: ltr; /* لضمان قراءة التوزيع من اليسار لليمين */
+}
+
+/* نمط أداة المربعات (متبقي كما هو) */
+.diagram-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* لمحاذاة المربعات لليمين */
+    margin-bottom: 20px;
+    direction: rtl; /* لإبقاء النص خارج المربعات باللغة العربية */
+}
+
+.orbital-row {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    gap: 5px;
+}
+
+.orbital-label {
+    font-weight: bold;
+    margin-left: 10px;
+    width: 40px; /* لتنظيم التسميات */
+    text-align: left;
+    direction: ltr; /* لضمان قراءة اسم الفلك من اليسار لليمين */
+}
+
+.orbital-box {
+    border: 1px solid #333;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #f8f9fa;
+    color: #dc3545; /* لون الأسهم */
+    margin-right: 2px;
+}
+
+/* نمط التمثيل النقطي (متبقي كما هو) */
+.lewis-dot-container {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    margin: 15px;
+    background-color: #fff;
+}
+
+.lewis-symbol {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    z-index: 10;
+}
+
+.dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #007bff;
+    border-radius: 50%;
+    z-index: 5;
+}
+
+/* تحديد مواقع النقاط (متبقي كما هو) */
+.dot-top-1 { top: 5px; right: 30px; }
+.dot-top-2 { top: 5px; left: 30px; }
+.dot-bottom-1 { bottom: 5px; right: 30px; }
+.dot-bottom-2 { bottom: 5px; left: 30px; }
+.dot-right-1 { top: 30px; right: 5px; }
+.dot-right-2 { top: 10px; right: 5px; }
+.dot-left-1 { top: 30px; left: 5px; }
+.dot-left-2 { top: 10px; left: 5px; }
+
+
+/* إضافة نمط خاص لتصنيف الفلك */
+.orbital-classification {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #28a745; /* لون أخضر */
+    direction: ltr;
+}
+
+/* نمط أيقونة المعلومات */
+.info-icon {
+    margin-right: 5px;
+    cursor: pointer;
+    color: #ffc107; /* لون أصفر/برتقالي لافت للنظر */
+    font-size: 0.9em;
+    font-weight: bold;
+    text-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+/* أنماط النوافذ المنبثقة (Modal) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-align: right;
+    direction: rtl;
+}
+
+.modal-content h3 {
+    color: #007bff;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* نمط أداة المقارنة */
+.compare-tool {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.compare-tool input {
+    flex-grow: 1;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.compare-tool button {
+    flex-shrink: 0;
+}
+#compare-results {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    margin-top: 15px;
+    text-align: right;
+}
+.compare-column {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+.compare-column h4 {
+    color: #007bff;
+    margin-bottom: 5px;
+    border-bottom: 1px dashed #ced4da;
+    padding-bottom: 5px;
+}
+.compare-column .orbital-classification {
+    font-size: 1.2em;
+}
+
+/* نمط وضع الاختبار */
+.quiz-mode-toggle {
+    margin: 20px 0;
+}
+
+.hidden-quiz {
+    display: none;
+}
+
+#quiz-area {
+    background-color: #ffe0b2; /* لون مختلف لوضع الاختبار */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+#quiz-area p {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #d35400;
+}
+
+.quiz-input, .quiz-check {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    direction: ltr;
+    text-align: left;
+}
+
+.quiz-result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
+
+
+
+/* الحاوية الخارجية: تضمن توسط الـ iframe أفقياً ومنع خروج أي أشرطة سحب */
+.project-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 0;
+    overflow: hidden; 
+    border-radius: 12px;
+    background: transparent;
+    display: flex;         
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* الإعدادات الافتراضية للشاشات الكبيرة (الكمبيوتر) */
+iframe {
+    width: 100%;
+    height: 850px; 
+    border: none !important;
+    outline: none !important;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* 🛠️ حل مشكلة اختفاء المجموعات الطرفية وتوسيط الـ 18 عموداً بالكامل 🛠️ */
+
+@media (max-width: 1024px) {
+    iframe {
+        width: 1400px;               /* 🌟 زيادة العرض الداخلي ليتسع لكل المجموعات دون أي قص */
+        flex-shrink: 0;              
+        transform: scale(0.65);      /* نسبة تصغير متناسبة لتوسيط الـ 1400 بكسل في شاشات الآيباد */
+        transform-origin: top center;
+        height: 1100px;
+    }
+    .project-container {
+        height: 750px;               
+    }
+}
+
+@media (max-width: 768px) {
+    iframe {
+        width: 1400px;
+        flex-shrink: 0;
+        transform: scale(0.48);      /* نسبة تصغير مخصصة لشاشات الجوال الكبيرة */
+        transform-origin: top center;
+        height: 1300px;
+    }
+    .project-container {
+        height: 650px;
+    }
+}
+
+@media (max-width: 480px) {
+    iframe {
+        width: 1400px;               /* الحفاظ على العرض الكلي ثابتاً لمنع اختفاء المجموعات 1 و 2 و 17 و 18 */
+        flex-shrink: 0;              
+        transform: scale(0.25);      /* 🌟 النسبة البرمجية الدقيقة لتصغير الـ 1400 بكسل بالكامل داخل شاشة الجوال الضيقة */
+        transform-origin: top center;
+        height: 1800px;              /* زيادة الارتفاع الداخلي لتعويض فارق التصغير وظهور السلاسل السفلية كاملة */
+    }
+    .project-container {
+        height: 500px;               /* الارتفاع الخارجي الفعلي للجدول على الشاشة لمنع الفراغ السفلي */
+    }
+}
+/* ابحث عن body وقم بتعديله ليصبح هكذا للسماح بالتمرير عند الحاجة للأسفل */
+body {
+  --header-height: 4rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100lvh;
+  overflow-y: auto; /* تم التعديل من hidden إلى auto لتتمكن من النزول للحقوق */
+  overflow-x: hidden;
+  perspective: 1000px;
+}
+
+/* أضف هذا التنسيق في نهاية ملف ali.css لضمان ظهور الحقوق بشكل جميل وفي الأسفل */
+.ali-table-footer {
+  margin-top: auto; /* يدفع الحقوق لأسفل المحتوى */
+  width: 100%;
+  text-align: center;
+  padding: 15px 0;
+  background-color: #0056b3(0, 0, 0, 0.7); /* خلفية داكنة متناسقة مع الثيم */
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  z-index: 10; /* لضمان ظهورها فوق الطبقات الخلفية */
+  position: relative;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق التوزيع الإلكتروني</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>تطبيق التوزيع الإلكتروني</h1>
+        <p>اختر عنصراً من الجدول الدوري أو أدخل العدد الذري يدوياً.</p>
+        
+        <input type="number" id="atomicNumberInput" placeholder="أدخل العدد الذري" min="1">
+        <button onclick="distributeFromInput()">توزيع</button>
+
+        <hr style="margin: 25px 0;">
+
+        <p>أو أدخل التوزيع الإلكتروني للعثور على العنصر.</p>
+        <input type="text" id="electronConfigInput" placeholder="مثال: 1s2 2s2 2p6">
+        <button onclick="findElementFromConfig()">أوجد العنصر</button>
+        
+        <div class="quiz-mode-toggle">
+            <button onclick="toggleQuizMode()">وضع الاختبار: 🧪 <span id="quizStatus">إيقاف</span></button>
+        </div>
+        <div id="quiz-area" class="hidden-quiz">
+            </div>
+
+        <div id="periodic-table-container">                                                                     
+            <h2>الجدول الدوري</h2>
+            <div class="project-container">
+
+            <iframe src="Periodic_Table_Animation/index.html" title="Periodic_Table_Animation"></iframe>
+</div>
+            
+        </div>
+        <div id="result"></div>
+        <div id="additional-result"></div>
+        
+        <hr style="margin: 25px 0;">
+        <h2>أداة المقارنة <span class="info-icon" onclick="showInfo('compare-tool-info')">ℹ️</span></h2>
+        <div class="info-box hidden" id="compare-tool-info">
+            <p><strong>شرح أداة المقارنة:</strong> يمكنك إدخال العدد الذري لعنصرين لعرض توزيعيهما الإلكتروني ومقارنة تصنيفهما (s, p, d, f) وأفلاكهما.</p>
+        </div>
+        <div class="compare-tool">
+            <input type="number" id="compareInput1" placeholder="العدد الذري للعنصر الأول" min="1" max="118">
+            <input type="number" id="compareInput2" placeholder="العدد الذري للعنصر الثاني" min="1" max="118">
+            <button onclick="compareElements()">قارن</button>
+        </div>
+        <div id="compare-results"></div>
+
+    </div>
+
+    <div class="modal-overlay hidden" id="modalOverlay" onclick="hideModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-button" onclick="hideModal()">&times;</span>
+            <h3 id="modalTitle"></h3>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <footer style="text-align: center; padding: 20px; direction: ltr;">
+    </footer>
+
+
+        
+<footer class="ali-table-footer">
+        <p>© 2026 جميع الحقوق محفوظة لـ <strong>TECHNOLOGY.ALI</strong></p>
+    </footer>
+</body>
+</html>
+</body>
+</html>
