@@ -776,7 +776,6 @@ body {
   min-height: 100lvh;
   overflow-y: auto; /* تم التعديل من hidden إلى auto لتتمكن من النزول للحقوق */
   overflow-x: hidden;
-  perspective: 1000px;
 }
 
 /* أضف هذا التنسيق في نهاية ملف ali.css لضمان ظهور الحقوق بشكل جميل وفي الأسفل */
@@ -785,7 +784,7 @@ body {
   width: 100%;
   text-align: center;
   padding: 15px 0;
-  background-color: #0056b3(0, 0, 0, 0.7); /* خلفية داكنة متناسقة مع الثيم */
+  background-color: transparent; /* إزالة الشريط الأسود عن النص */
   color: #fff;
   font-family: sans-serif;
   font-size: 0.9rem;
