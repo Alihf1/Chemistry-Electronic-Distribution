@@ -12,7 +12,7 @@ const ELEMENT_FIELDS = {
   NAME: 1,
   COLOR: 2,
   COLUMN: 3,
-  ROW: 4,
+  ROW: 4, 
   ATOMIC_MASS: 5,
   DENSITY: 6,
   MELTING_POINT: 7,
