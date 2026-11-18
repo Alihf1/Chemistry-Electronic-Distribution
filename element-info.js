@@ -1021,7 +1021,7 @@ function buildElementExampleHTML(atomicNumber, symbol) {
                     </div>
                 </div>
 
-                <!-- شبكة البطاقات (حقيقة صادمة | استخدام مفاجئ | رقم مثير) -->
+                <!-- شبكة البطاقات (حقيقة صادمة | استخداماته | مميزاته) -->
                 <div class="li-cards-grid">
                     <div class="li-feature-card">
                         <div class="li-card-header">
@@ -1039,7 +1039,7 @@ function buildElementExampleHTML(atomicNumber, symbol) {
                     <div class="li-feature-card">
                         <div class="li-card-header">
                             <span class="li-card-icon">💡</span>
-                            <h4>استخدام مفاجئ</h4>
+                            <h4>استخداماته</h4>
                         </div>
                         <div class="li-card-body-side">
                             <div class="li-card-text">
@@ -1052,7 +1052,7 @@ function buildElementExampleHTML(atomicNumber, symbol) {
                     <div class="li-feature-card li-card-full-span">
                         <div class="li-card-header">
                             <span class="li-card-icon">💎</span>
-                            <h4>رقم مثير</h4>
+                            <h4>مميزاته</h4>
                         </div>
                         <div class="li-card-body-side">
                             <div class="li-card-text">

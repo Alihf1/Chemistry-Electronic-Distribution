@@ -17,7 +17,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ChemTec">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
     <div class="container">
@@ -57,11 +57,11 @@
         <hr style="margin: 25px 0;">
         <h2>أداة المقارنة <span class="info-icon" onclick="showInfo('compare-tool-info')">ℹ️</span></h2>
         <div class="info-box hidden" id="compare-tool-info">
-            <p><strong>شرح أداة المقارنة:</strong> يمكنك إدخال العدد الذري لعنصرين لعرض توزيعيهما الإلكتروني ومقارنة تصنيفهما (s, p, d, f) وأفلاكهما.</p>
+            <p><strong>شرح أداة المقارنة:</strong> يمكنك إدخال إما العدد الذري أو رمز العنصر (مثل: H، Fe، Au) لكل عنصر، ثم عرض التوزيعين الإلكتروني والمقارنة بينهما.</p>
         </div>
         <div class="compare-tool">
-            <input type="number" id="compareInput1" placeholder="العدد الذري للعنصر الأول" min="1" max="118">
-            <input type="number" id="compareInput2" placeholder="العدد الذري للعنصر الثاني" min="1" max="118">
+                <input type="text" id="compareInput1" placeholder="رمز أو عدد ذري للعنصر الأول (H أو 1)" autocomplete="off">
+            <input type="text" id="compareInput2" placeholder="رمز أو عدد ذري للعنصر الثاني (Fe أو 26)" autocomplete="off">
             <button onclick="compareElements()">قارن</button>
         </div>
         <div id="compare-results"></div>
@@ -82,8 +82,8 @@
         </div>
     </footer>
 
-    <script src="element-info.js"></script>
-    <script src="script.js"></script>
+    <script src="element-info.js?v=3"></script>
+    <script src="script.js?v=3"></script>
     <script>
         // تسجيل Service Worker حتى يعمل التطبيق بدون إنترنت بعد التثبيت
         if ('serviceWorker' in navigator) {

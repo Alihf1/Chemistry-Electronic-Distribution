@@ -97,7 +97,7 @@ function showInfo(type) {
             break;
         case 'compare-tool-info':
             title = 'شرح أداة المقارنة';
-            body = '<p>تتيح لك هذه الأداة إدخال عددين ذريين مختلفين وعرض التوزيع الإلكتروني الكامل، واختصار الغاز النبيل، وتصنيف الفلك (s, p, d, f) لكل منهما للمقارنة المباشرة.</p>';
+            body = '<p>تتيح لك هذه الأداة إدخال رمزين أو عددين ذريين (أو مزيج منهما) وعرض التوزيع الإلكتروني الكامل، واختصار الغاز النبيل، وتصنيف الفلك (s, p, d, f) لكل منهما للمقارنة المباشرة.</p>';
             break;
         default:
             return;
@@ -355,18 +355,39 @@ function findElementFromConfig() {
 }
 
 function compareElements() {
-    const input1 = parseInt(document.getElementById('compareInput1').value);
-    const input2 = parseInt(document.getElementById('compareInput2').value);
+    const raw1 = document.getElementById('compareInput1').value.trim();
+    const raw2 = document.getElementById('compareInput2').value.trim();
     const resultsDiv = document.getElementById('compare-results');
     resultsDiv.innerHTML = '';
 
-    if (isNaN(input1) || input1 < 1 || input1 > 118 || isNaN(input2) || input2 < 1 || input2 > 118) {
-        resultsDiv.textContent = 'الرجاء إدخال أعداد ذرية صحيحة بين 1 و 118 لكلا العنصرين.';
+    const parseElement = (raw) => {
+        if (!raw) return null;
+        const trimmed = raw.trim();
+        // محاولة 1: إدخال رقم = العدد الذري
+        const num = parseInt(trimmed, 10);
+        if (!isNaN(num) && String(num) === trimmed && num >= 1 && num <= 118) {
+            return { id: num, info: elementDataMap.get(num) || null };
+        }
+        // محاولة 2: إدخال نص = رمز العنصر (مثل: H, Fe, Au)
+        for (const [id, info] of elementDataMap.entries()) {
+            if (info.symbol.toLowerCase() === trimmed.toLowerCase()) {
+                return { id, info };
+            }
+        }
+        return null;
+    };
+
+    const result1 = parseElement(raw1);
+    const result2 = parseElement(raw2);
+
+    if (!result1 || !result2) {
+        resultsDiv.textContent = 'الرجاء إدخال أعداد ذرية (1-118) أو رموز العناصر (مثل H, Fe, Au) لكلا العنصرين.';
         return;
     }
-
-    const elementInfo1 = elementDataMap.get(input1);
-    const elementInfo2 = elementDataMap.get(input2);
+    const input1 = result1.id;
+    const input2 = result2.id;
+    const elementInfo1 = result1.info;
+    const elementInfo2 = result2.info;
 
     if (!elementInfo1 || !elementInfo2) {
         resultsDiv.textContent = 'أحد الأعداد الذرية المدخلة لا يطابق عنصراً معروفاً.';
