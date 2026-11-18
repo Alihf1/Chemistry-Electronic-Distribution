@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطبيق التوزيع الإلكتروني</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2b1055">
+    <meta name="application-name" content="الكيميائي">
+    <link rel="icon" href="icon-192x192.png" type="image/png">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="icon-72x72.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ChemTec">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -71,5 +84,15 @@
 
     <script src="element-info.js"></script>
     <script src="script.js"></script>
+    <script>
+        // تسجيل Service Worker حتى يعمل التطبيق بدون إنترنت بعد التثبيت
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(err => {
+                    console.log('SW registration failed:', err);
+                });
+            });
+        }
+    </script>
 </body>
 </html>
