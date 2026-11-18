@@ -1,48 +1,170 @@
-
 /*
  * © 2026 TECHNOLOGY.ALI - جميع الحقوق محفوظة.
  */
-.container {
-    max-width: 900px;
-    margin: 30px auto;
+
+:root {
+    --bg-main: #c4dcff;
+    --container-bg: rgb(252, 255, 164);
+    --text-color: #212529;
+    --text-secondary: #495057;
+    --result-bg: #f9f9f9;
+    --border-color: #ced4da;
+    --btn-bg: #007bff;
+    --btn-hover: #0056b3;
+}
+
+body.dark-mode {
+    /* الوضع الليلي: نفس لوحة ألوان بطاقة «مثال تطبيقي» (بنفسجي غامق) */
+    --bg-main: #0d051a;
+    --container-bg: #1d0e36;
+    --text-color: #f8f9fa;
+    --text-secondary: #c5b3d9;
+    --result-bg: #241239;
+    --border-color: #4b2a6d;
+    --btn-bg: #9c27b0;
+    --btn-hover: #ab47bc;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100lvh;
+    margin: 0;
+    direction: rtl;
+    text-align: center;
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    background: var(--container-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    width: 98%;
+    max-width: 1400px;
+    direction: rtl;
+    transition: background-color 0.3s ease;
+}
+
+h1, h2 {
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+.theme-toggle-container {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.theme-btn {
+    background-color: #343a40;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.theme-btn:hover {
+    background-color: #212529;
+}
+
+#atomicNumberInput, #electronConfigInput, #compareInput1, #compareInput2 {
+    width: calc(100% - 22px);
+    padding: 12px;
+    margin: 15px 0 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-align: right;
+    font-size: 1em;
+    direction: ltr;
+    background-color: var(--container-bg);
+    color: var(--text-color);
+}
+
+#compareInput1, #compareInput2 {
+    width: 48%;
+    display: inline-block;
+}
+
+button {
+    background-color: var(--btn-bg);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.05em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: var(--btn-hover);
+    transform: translateY(-2px);
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
 /* ---------------------------------------------------------------- */
-/* التعديل المطلوب: جعل منطقة النتائج في جهة اليسار ومحاذاة LTR */
+/* منطقة النتائج والتوزيع الإلكتروني */
 /* ---------------------------------------------------------------- */
-#result, #additional-result, #compare-results {
-    border: 1px solid #ccc;
+#result, #additional-result, #exampleResult, #compare-results {
+    border: 1px solid var(--border-color);
     padding: 15px;
     margin-top: 20px;
     border-radius: 8px;
-    background-color: #f9f9f9;
-    /* الخطوة 1: تحديد الاتجاه من اليسار لليمين */
-    direction: ltr; 
-    /* الخطوة 2: محاذاة النص والـ Inline Content لليسار */
-    text-align: left; 
-}
-
-/* تحديد محاذاة عناوين النتائج لتبقى في اليسار */
-#result h2, #additional-result h2, #compare-results h3 {
+    background-color: var(--result-bg);
+    direction: ltr;
     text-align: left;
-    /* إعادة توجيه العنوان في حال كان التأثير قوياً من اتجاه الصفحة RTL */
-    direction: ltr; 
+    color: var(--text-color);
 }
 
-/* ---------------------------------------------------------------- */
-/* تعديل طريقة المربعات لتظهر من اليسار لليمين بشكل صحيح */
-/* ---------------------------------------------------------------- */
+#exampleResult .li-showcase-wrapper {
+    margin-top: 0;
+}
+
+#result h3, #additional-result > h3 {
+    direction: rtl;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: var(--text-color);
+}
+
+#result > p, #additional-result > p {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #007bff;
+    direction: ltr;
+}
+
 .diagram-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-top: 15px;
-    /* تحديد اتجاه الحاوية لتبدأ من اليسار */
-    direction: ltr; 
+    direction: ltr;
     text-align: left;
 }
 
@@ -50,43 +172,607 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    /* للتأكد من أن الصف يبدأ من اليسار */
-    direction: ltr; 
+    direction: ltr;
 }
 
 .orbital-label {
     font-weight: bold;
-    min-width: 40px; /* لضمان محاذاة متناسقة */
-    text-align: right; /* لجعل التسمية (1s, 2s) قريبة من المربعات */
+    min-width: 40px;
+    text-align: right;
     padding-right: 5px;
+    direction: ltr;
+    color: var(--text-color);
 }
 
 .orbital-box {
     width: 30px;
     height: 30px;
-    border: 1px solid #333;
+    border: 1px solid var(--border-color);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2em;
-    font-family: monospace;
-    background-color: #fff;
+    font-weight: bold;
+    background-color: var(--container-bg);
+    color: #dc3545;
     border-radius: 3px;
-    /* Arrows must be LTR */
-    direction: ltr; 
+    direction: ltr;
 }
 
-/* باقي أكواد CSS الأصلية */
-h1 {
-    color: #333;
+.orbital-classification {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #28a745;
+    direction: ltr;
+}
+
+/* ---------------------------------------------------------------- */
+/* أنماط رمز لويس */
+/* ---------------------------------------------------------------- */
+.lewis-dot-container {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    margin: 15px;
+    background-color: var(--container-bg);
+    direction: ltr;
+}
+
+.lewis-symbol {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--text-color);
+    z-index: 10;
+}
+
+.dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #007bff;
+    border-radius: 50%;
+    z-index: 5;
+}
+
+.dot-top-1 { top: 5px; right: 30px; }
+.dot-top-2 { top: 5px; left: 30px; }
+.dot-bottom-1 { bottom: 5px; right: 30px; }
+.dot-bottom-2 { bottom: 5px; left: 30px; }
+.dot-right-1 { top: 30px; right: 5px; }
+.dot-right-2 { top: 10px; right: 5px; }
+.dot-left-1 { top: 30px; left: 5px; }
+.dot-left-2 { top: 10px; left: 5px; }
+
+/* ---------------------------------------------------------------- */
+/* أنماط بطاقة الليثيوم (ألوان أرجوانية داكنة مطابقة للصورة بدقة) */
+/* ---------------------------------------------------------------- */
+.li-showcase-wrapper {
+    direction: rtl;
+    text-align: right;
+    margin-top: 20px;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+.li-intro-banner {
+    background: linear-gradient(135deg, #2b1055, #4a148c);
+    color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 2px solid #9c27b0;
+}
+
+.li-intro-banner h3 {
+    margin: 0;
+    color: #ffffff !important;
+    font-size: 1.3em;
+}
+
+.li-badge {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #f3e5f5;
+}
+
+.li-infographic-card {
+    background: linear-gradient(180deg, #130924 0%, #1d0e36 50%, #120822 100%);
+    color: #f8f9fa;
+    padding: 25px;
+    border-radius: 0 0 14px 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    border: 1px solid #3c1e6e;
+}
+
+/* 1- رأس البطاقة وصورة العنصر */
+.li-header-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(186, 104, 200, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.li-symbol-box {
+    background: linear-gradient(145deg, #28124d, #190a33);
+    border: 2px solid #ab47bc;
+    border-radius: 12px;
+    padding: 12px 22px;
+    text-align: center;
+    min-width: 110px;
+    position: relative;
+    box-shadow: 0 0 15px rgba(171, 71, 188, 0.3);
+}
+
+.li-atomic-num {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #e1bee7;
+}
+
+.li-symbol-text {
+    font-size: 3em;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-top: 8px;
+}
+
+.li-en-name {
+    font-size: 0.95em;
+    color: #ce93d8;
+    letter-spacing: 1px;
+}
+
+.li-ar-name {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #ffffff;
+    margin-top: 4px;
+}
+
+.li-main-image-box {
+    flex: 0 0 160px;
+    height: 140px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(186, 104, 200, 0.4);
+    background: #0d051a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* صندوق الإيموجي داخل بطاقة «مثال تطبيقي» — يعرض إيموجي افتراضيًا حتى تصل الصور */
+.li-emoji-box {
+    position: relative;
+    font-size: 4.5em;
+    line-height: 1;
+}
+
+.li-emoji-box .li-topic-emoji {
+    font-size: inherit;
+}
+
+/* صورة العنصر — تظهر فوق الإيموجي إذا وُجدت */
+.li-topic-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: inherit;
+}
+
+.li-brief-desc {
+    flex: 1;
+    min-width: 220px;
+}
+
+.li-code-tag {
+    display: inline-block;
+    background: rgba(171, 71, 188, 0.25);
+    color: #e1bee7;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border: 1px solid rgba(171, 71, 188, 0.5);
+}
+
+.li-brief-desc p {
+    color: #e0e0e0 !important;
+    font-size: 1.05em !important;
+    font-weight: normal !important;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 2 & 3- شبكة البطاقات (حقيقة صادمة، استخدام مفاجئ، رقم مثير) */
+.li-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.li-card-full-span {
+    grid-column: span 2;
+}
+
+.li-feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(186, 104, 200, 0.25);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.li-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(156, 39, 176, 0.2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-bottom: 14px;
+    border: 1px solid rgba(186, 104, 200, 0.4);
+}
+
+.li-card-header h4 {
+    margin: 0;
+    color: #e1bee7;
+    font-size: 1em;
+}
+
+.li-card-body-side {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.li-card-text {
+    flex: 1;
+}
+
+.li-card-text h5 {
+    margin: 0 0 8px 0;
+    font-size: 1.25em;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+.li-card-text h5 span {
+    color: #ce93d8;
+}
+
+.li-card-text p {
+    margin: 0;
+    color: #cfd8dc !important;
+    font-size: 0.95em !important;
+    font-weight: normal !important;
+    line-height: 1.5;
+}
+
+.li-card-side-img {
+    width: 115px;
+    height: 115px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #0d051a;
+}
+
+.li-card-side-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.li-compare-img {
+    width: 160px;
+    height: 110px;
+}
+
+/* 4- خصائص الليثيوم */
+.li-section-block {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(186, 104, 200, 0.25);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.li-section-title {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #e1bee7;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(186, 104, 200, 0.35);
+}
+
+.li-properties-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.li-prop-item {
+    background: rgba(20, 10, 38, 0.7);
+    border: 1px solid rgba(171, 71, 188, 0.3);
+    border-radius: 10px;
+    padding: 14px 10px;
     text-align: center;
 }
 
-.info-icon {
-    cursor: pointer;
-    color: #007bff;
+.li-prop-icon {
+    font-size: 1.8em;
+    margin-bottom: 8px;
+}
+
+.li-prop-item h6 {
+    margin: 0 0 6px 0;
+    font-size: 1.05em;
+    color: #ffffff;
+}
+
+.li-prop-item p {
+    margin: 0;
+    color: #b0bec5 !important;
+    font-size: 0.9em !important;
+    font-weight: normal !important;
+    line-height: 1.4;
+}
+
+/* 5- عند وضع الليثيوم في الماء */
+.li-reaction-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.li-reaction-list li {
+    background: rgba(156, 39, 176, 0.15);
+    border: 1px solid rgba(186, 104, 200, 0.3);
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.li-check {
+    color: #ce93d8;
+    font-size: 1.1em;
+}
+
+/* 6- جدول المعلومات */
+.li-table-responsive {
+    overflow-x: auto;
+}
+
+.li-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background: rgba(19, 9, 36, 0.8);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.li-data-table th {
+    background: rgba(156, 39, 176, 0.35);
+    color: #f3e5f5;
+    padding: 12px;
+    font-size: 1em;
+    border: 1px solid rgba(186, 104, 200, 0.3);
+}
+
+.li-data-table td {
+    padding: 14px 10px;
+    color: #ffffff;
+    border: 1px solid rgba(186, 104, 200, 0.25);
+    vertical-align: middle;
+}
+
+.li-data-table td strong {
+    display: block;
     font-size: 1.2em;
+    color: #ffffff;
+}
+
+.li-sub-note {
+    display: block;
+    font-size: 0.85em;
+    color: #ce93d8;
+    margin-top: 4px;
+}
+
+/* 7- تحذير */
+.li-warning-banner {
+    background: linear-gradient(90deg, rgba(183, 28, 28, 0.25), rgba(156, 39, 176, 0.2));
+    border: 1px solid #ef5350;
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.li-warning-badge {
+    background: #d32f2f;
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.05em;
+}
+
+.li-warning-banner p {
+    margin: 0;
+    color: #ffcdd2 !important;
+    font-size: 1em !important;
+    font-weight: bold !important;
+    flex: 1;
+}
+
+/* ================================================================ */
+/* بطاقة الليثيوم (✨ مثال تطبيقي) — ألوان الوضع العادي (الفاتح)   */
+/* بنفس لوحة ألوان الصفحة الرئيسية: أزرق #007bff + أصفر + أبيض      */
+/* تُطبَّق فقط عند عدم وجود كلاس dark-mode على body                 */
+/* ================================================================ */
+body:not(.dark-mode) .li-intro-banner {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border-bottom-color: #004085;
+}
+
+body:not(.dark-mode) .li-infographic-card {
+    background: linear-gradient(180deg, #fffef2 0%, #ffffa4 100%);
+    color: #212529;
+    border-color: #e0dc9a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+body:not(.dark-mode) .li-header-section {
+    background: #ffffff;
+    border-color: #ced4da;
+}
+
+body:not(.dark-mode) .li-symbol-box {
+    background: #ffffff;
+    border-color: #007bff;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
+}
+
+body:not(.dark-mode) .li-symbol-text { color: #212529; }
+body:not(.dark-mode) .li-atomic-num { color: #0056b3; }
+body:not(.dark-mode) .li-en-name { color: #495057; }
+body:not(.dark-mode) .li-ar-name { color: #212529; }
+
+body:not(.dark-mode) .li-main-image-box,
+body:not(.dark-mode) .li-card-side-img {
+    background: #ffffff;
+    border-color: #ced4da;
+}
+
+body:not(.dark-mode) .li-code-tag {
+    background: #007bff;
+    color: #ffffff;
+    border-color: #0056b3;
+}
+
+body:not(.dark-mode) .li-brief-desc p { color: #212529 !important; }
+body:not(.dark-mode) .li-card-text p { color: #495057 !important; }
+body:not(.dark-mode) .li-card-text h5 { color: #212529; }
+body:not(.dark-mode) .li-card-text h5 span { color: #0056b3; }
+
+body:not(.dark-mode) .li-feature-card {
+    background: #ffffff;
+    border-color: #ced4da;
+}
+
+body:not(.dark-mode) .li-card-header {
+    background: #eaf3ff;
+    border-color: #b6d4fe;
+}
+
+body:not(.dark-mode) .li-card-header h4 { color: #0056b3; }
+
+body:not(.dark-mode) .li-section-block {
+    background: #ffffff;
+    border-color: #ced4da;
+}
+
+body:not(.dark-mode) .li-section-title {
+    color: #212529;
+    border-bottom-color: #ced4da;
+}
+
+body:not(.dark-mode) .li-prop-item {
+    background: #f9f9f9;
+    border-color: #ced4da;
+}
+
+body:not(.dark-mode) .li-prop-item h6 { color: #212529; }
+body:not(.dark-mode) .li-prop-item p { color: #495057 !important; }
+
+body:not(.dark-mode) .li-reaction-list li {
+    background: #eaf3ff;
+    border-color: #b6d4fe;
+    color: #004085;
+}
+
+body:not(.dark-mode) .li-check { color: #007bff; }
+
+body:not(.dark-mode) .li-data-table { background: #ffffff; }
+
+body:not(.dark-mode) .li-data-table th {
+    background: #007bff;
+    color: #ffffff;
+    border-color: #0056b3;
+}
+
+body:not(.dark-mode) .li-data-table td {
+    color: #212529;
+    border-color: #ced4da;
+}
+
+body:not(.dark-mode) .li-data-table td strong { color: #212529; }
+body:not(.dark-mode) .li-sub-note { color: #0056b3; }
+
+body:not(.dark-mode) .li-warning-banner {
+    background: linear-gradient(90deg, rgba(220, 53, 69, 0.1), rgba(255, 193, 7, 0.18));
+    border-color: #dc3545;
+}
+
+body:not(.dark-mode) .li-warning-banner p { color: #842029 !important; }
+
+/* ---------------------------------------------------------------- */
+/* النوافذ المنبثقة وأداة المقارنة */
+/* ---------------------------------------------------------------- */
+.info-icon {
     margin-right: 5px;
+    cursor: pointer;
+    color: #ffc107;
+    font-size: 0.9em;
+    font-weight: bold;
 }
 
 .info-box {
@@ -101,477 +787,6 @@ h1 {
     display: none !important;
 }
 
-input[type="number"], input[type="text"], button {
-    padding: 10px;
-    margin: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1em;
-    direction: rtl; /* الإدخالات تبقى RTL لأنها باللغة العربية */
-    text-align: right;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-hr {
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-}
-
-/* ---------------------------------------------------------------- */
-/* أنماط الجدول الدوري (لا تحتاج لتغيير اتجاه العرض) */
-/* ---------------------------------------------------------------- */
-#periodic-table-container {
-    margin-top: 30px;
-    overflow-x: auto;
-}
-
-#periodic-table {
-    display: grid;
-    grid-template-columns: repeat(18, 1fr);
-    gap: 2px;
-    font-size: 0.7em;
-    /* يبدأ من اليمين لليسار */
-    direction: rtl; 
-}
-
-.element {
-    border: 1px solid #333;
-    padding: 2px;
-    height: 65px;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 3px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.element:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.element span {
-    font-size: 0.9em;
-    align-self: flex-start;
-    margin-right: 2px;
-}
-
-.element h3 {
-    margin: 0;
-    font-size: 1.5em;
-}
-
-.element p {
-    margin: 0;
-    font-size: 0.7em;
-}
-
-/* ألوان المجموعات */
-.alkali-metal { background-color: #ff9999; }
-.alkaline-earth-metal { background-color: #ffcc99; }
-.transition-metal { background-color: #ffff99; }
-.post-transition-metal { background-color: #c0ffc0; }
-.metalloid { background-color: #cce0ff; }
-.nonmetal { background-color: #99ffcc; }
-.halogen { background-color: #cc99ff; }
-.noble-gas { background-color: #99ccff; }
-.lanthanide { background-color: #ffb3ff; }
-.actinide { background-color: #ffccff; }
-.empty {
-    visibility: hidden;
-    /* لضمان الحفاظ على حجم الخلية الفارغة */
-    height: 0; 
-}
-.empty-span-10 { grid-column: span 10; }
-.empty-span-16 { grid-column: span 16; }
-.empty-span-1 { grid-column: span 1; }
-.empty-span-2 { grid-column: span 2; }
-
-
-/* ---------------------------------------------------------------- */
-/* أنماط نافذة Modal (لا تحتاج لتغيير اتجاه العرض) */
-/* ---------------------------------------------------------------- */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    max-width: 80%;
-    width: 500px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
-    /* للحفاظ على اتجاه Modal RTL */
-    direction: rtl; 
-    text-align: right;
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 1.5em;
-    font-weight: bold;
-    cursor: pointer;
-    color: #aaa;
-}
-
-.close-button:hover {
-    color: #333;
-}
-
-/* ---------------------------------------------------------------- */
-/* أنماط وضع الاختبار (Quiz Mode) */
-/* ---------------------------------------------------------------- */
-.quiz-mode-toggle {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.hidden-quiz {
-    display: none;
-    background-color: #fff0f0;
-    border: 2px dashed #ff6666;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 15px;
-}
-
-#quiz-area {
-    /* للحفاظ على اتجاه منطقة الاختبار RTL */
-    direction: rtl;
-    text-align: right;
-}
-
-/* ---------------------------------------------------------------- */
-/* أنماط رمز لويس */
-/* ---------------------------------------------------------------- */
-
-.lewis-dot-container {
-    display: inline-flex;
-    position: relative;
-    margin: 10px;
-    border: 1px dashed #777;
-    padding: 10px 20px;
-    border-radius: 5px;
-    direction: ltr; /* لضمان ظهور الرمز في المنتصف والنقاط حوله بشكل صحيح */
-}
-
-.lewis-symbol {
-    font-size: 2em;
-    font-weight: bold;
-    z-index: 10;
-    margin: 0;
-    padding: 0;
-}
-
-.dot {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background-color: black;
-    border-radius: 50%;
-}
-
-.dot-top-1 { top: 5px; left: 50%; transform: translateX(-50%); }
-.dot-top-2 { top: 5px; left: calc(50% + 5px); transform: translateX(-50%); }
-
-.dot-bottom-1 { bottom: 5px; left: 50%; transform: translateX(-50%); }
-.dot-bottom-2 { bottom: 5px; left: calc(50% + 5px); transform: translateX(-50%); }
-
-.dot-right-1 { right: 5px; top: 50%; transform: translateY(-50%); }
-.dot-right-2 { right: 5px; top: calc(50% + 5px); transform: translateY(-50%); }
-
-.dot-left-1 { left: 5px; top: 50%; transform: translateY(-50%); }
-.dot-left-2 { left: 5px; top: calc(50% + 5px); transform: translateY(-50%); }
-
-/* ---------------------------------------------------------------- */
-/* Media Queries للتجاوبية */
-/* ---------------------------------------------------------------- */
-@media (max-width: 600px) {
-    .container {
-        margin: 10px;
-        padding: 10px;
-    }
-
-    #periodic-table {
-        font-size: 0.5em;
-    }
-
-    .element {
-        height: 50px;
-    }
-
-    .orbital-box {
-        width: 25px;
-        height: 25px;
-        font-size: 1em;
-    }
-
-
-}
-
-
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #c4dcff; /* لون خلفية فاتح */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    direction: rtl; /* تم الإبقاء على RTL */
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box; /* لضمان عدم تجاوز العناصر للحجم الكلي */
-}
-
-.container {
-    background: rgb(252, 255, 164);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    width: 98%;
-    max-width: 1400px; /* زيادة أقصى عرض للجدول الكامل */
-    direction: rtl; /* تم الإبقاء على RTL */
-}
-
-h1, h2 {
-    color: #212529; /* لون داكن للعناوين */
-    margin-bottom: 15px;
-}
-
-p {
-    color: #495057;
-}
-
-/* نمط الإدخال والأزرار (متبقي كما هو) */
-#atomicNumberInput, #electronConfigInput, #compareInput1, #compareInput2 {
-    width: calc(100% - 22px);
-    padding: 12px;
-    margin: 15px 0 10px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    text-align: right; /* محاذاة لليمين في RTL */
-    font-size: 1em;
-    direction: ltr; /* لجعل الأرقام والرموز تبدو طبيعية */
-}
-#compareInput1, #compareInput2 {
-    width: 48%; /* تقسيم العرض لأداة المقارنة */
-    display: inline-block;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.05em;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-bottom: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-}
-
-/* نمط الجدول الدوري (متبقي كما هو) */
-#periodic-table-container {
-    margin-top: 30px;
-    overflow-x: auto; /* يسمح بالتمرير الأفقي إذا كان الجدول أكبر من الشاشة */
-    padding-bottom: 10px; /* مسافة للتمرير الأفقي */
-}
-
-#periodic-table {
-    display: grid;
-    grid-template-columns: repeat(18, 1fr); /* 18 عمود للجدول الدوري */
-    gap: 4px; /* تقليل المسافة بين العناصر */
-    min-width: 900px; /* للتأكد من أن الجدول لا يتقلص كثيرًا على الشاشات الصغيرة */
-    direction: ltr; /* لعرض الجدول من اليسار لليمين */
-}
-
-.element {
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    padding: 5px 3px; /* تقليل البادينغ الداخلي */
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.8em; /* حجم خط أصغر */
-    height: 60px; /* ارتفاع ثابت للعنصر */
-    box-sizing: border-box;
-}
-
-/* الألوان (متبقي كما هو) */
-.alkali-metal { background-color: #ff9999; }
-.alkaline-earth-metal { background-color: #ffcc99; }
-.transition-metal { background-color: #ffff99; }
-.post-transition-metal { background-color: #ccffcc; }
-.metalloid { background-color: #99ff99; }
-.nonmetal { background-color: #99ffcc; }
-.halogen { background-color: #99ffff; }
-.noble-gas { background-color: #ccccff; }
-.lanthanide { background-color: #ffccff; }
-.actinide { background-color: #ff99ff; }
-
-/* أنماط نتائج التوزيع (متبقي كما هو) */
-#result {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    text-align: right; /* محاذاة لليمين في RTL */
-    direction: ltr; /* لجعل التوزيع الإلكتروني يظهر بشكل صحيح */
-}
-#result h3, #additional-result h3 {
-    direction: rtl; /* لإرجاع العناوين للغة العربية */
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* لترتيب العنوان والأيقونة لليمين */
-}
-#result p, #additional-result p {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #007bff;
-    direction: ltr; /* لضمان قراءة التوزيع من اليسار لليمين */
-}
-
-/* نمط أداة المربعات (متبقي كما هو) */
-.diagram-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* لمحاذاة المربعات لليمين */
-    margin-bottom: 20px;
-    direction: rtl; /* لإبقاء النص خارج المربعات باللغة العربية */
-}
-
-.orbital-row {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
-    gap: 5px;
-}
-
-.orbital-label {
-    font-weight: bold;
-    margin-left: 10px;
-    width: 40px; /* لتنظيم التسميات */
-    text-align: left;
-    direction: ltr; /* لضمان قراءة اسم الفلك من اليسار لليمين */
-}
-
-.orbital-box {
-    border: 1px solid #333;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2em;
-    font-weight: bold;
-    background-color: #f8f9fa;
-    color: #dc3545; /* لون الأسهم */
-    margin-right: 2px;
-}
-
-/* نمط التمثيل النقطي (متبقي كما هو) */
-.lewis-dot-container {
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #333;
-    border-radius: 10px;
-    padding: 10px;
-    width: 60px;
-    height: 60px;
-    margin: 15px;
-    background-color: #fff;
-}
-
-.lewis-symbol {
-    font-size: 2em;
-    font-weight: bold;
-    color: #333;
-    z-index: 10;
-}
-
-.dot {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background-color: #007bff;
-    border-radius: 50%;
-    z-index: 5;
-}
-
-/* تحديد مواقع النقاط (متبقي كما هو) */
-.dot-top-1 { top: 5px; right: 30px; }
-.dot-top-2 { top: 5px; left: 30px; }
-.dot-bottom-1 { bottom: 5px; right: 30px; }
-.dot-bottom-2 { bottom: 5px; left: 30px; }
-.dot-right-1 { top: 30px; right: 5px; }
-.dot-right-2 { top: 10px; right: 5px; }
-.dot-left-1 { top: 30px; left: 5px; }
-.dot-left-2 { top: 10px; left: 5px; }
-
-
-/* إضافة نمط خاص لتصنيف الفلك */
-.orbital-classification {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #28a745; /* لون أخضر */
-    direction: ltr;
-}
-
-/* نمط أيقونة المعلومات */
-.info-icon {
-    margin-right: 5px;
-    cursor: pointer;
-    color: #ffc107; /* لون أصفر/برتقالي لافت للنظر */
-    font-size: 0.9em;
-    font-weight: bold;
-    text-shadow: 0 0 2px rgba(0,0,0,0.2);
-}
-
-/* أنماط النوافذ المنبثقة (Modal) */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -586,7 +801,8 @@ button:hover {
 }
 
 .modal-content {
-    background: white;
+    background: var(--container-bg);
+    color: var(--text-color);
     padding: 30px;
     border-radius: 10px;
     width: 80%;
@@ -595,10 +811,6 @@ button:hover {
     position: relative;
     text-align: right;
     direction: rtl;
-}
-
-.modal-content h3 {
-    color: #007bff;
 }
 
 .close-button {
@@ -611,11 +823,6 @@ button:hover {
     color: #333;
 }
 
-.hidden {
-    display: none !important;
-}
-
-/* نمط أداة المقارنة */
 .compare-tool {
     display: flex;
     justify-content: space-between;
@@ -623,14 +830,13 @@ button:hover {
     margin-bottom: 20px;
     flex-wrap: wrap;
 }
+
 .compare-tool input {
     flex-grow: 1;
     margin-left: 5px;
     margin-right: 5px;
 }
-.compare-tool button {
-    flex-shrink: 0;
-}
+
 #compare-results {
     display: flex;
     justify-content: space-around;
@@ -638,24 +844,15 @@ button:hover {
     margin-top: 15px;
     text-align: right;
 }
+
 .compare-column {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    background-color: #f9f9f9;
-}
-.compare-column h4 {
-    color: #007bff;
-    margin-bottom: 5px;
-    border-bottom: 1px dashed #ced4da;
-    padding-bottom: 5px;
-}
-.compare-column .orbital-classification {
-    font-size: 1.2em;
+    background-color: var(--result-bg);
 }
 
-/* نمط وضع الاختبار */
 .quiz-mode-toggle {
     margin: 20px 0;
 }
@@ -665,17 +862,12 @@ button:hover {
 }
 
 #quiz-area {
-    background-color: #ffe0b2; /* لون مختلف لوضع الاختبار */
+    background-color: #ffe0b2;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
     text-align: right;
-}
-
-#quiz-area p {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #d35400;
+    color: #333;
 }
 
 .quiz-input, .quiz-check {
@@ -694,17 +886,9 @@ button:hover {
     font-weight: bold;
 }
 
-.correct {
-    color: green;
-}
+.correct { color: green; }
+.incorrect { color: red; }
 
-.incorrect {
-    color: red;
-}
-
-
-
-/* الحاوية الخارجية: تضمن توسط الـ iframe أفقياً ومنع خروج أي أشرطة سحب */
 .project-container {
     width: 100%;
     max-width: 100%;
@@ -718,7 +902,6 @@ button:hover {
     align-items: flex-start;
 }
 
-/* الإعدادات الافتراضية للشاشات الكبيرة (الكمبيوتر) */
 iframe {
     width: 100%;
     height: 850px; 
@@ -728,66 +911,150 @@ iframe {
     transition: transform 0.3s ease;
 }
 
-/* 🛠️ حل مشكلة اختفاء المجموعات الطرفية وتوسيط الـ 18 عموداً بالكامل 🛠️ */
-
 @media (max-width: 1024px) {
     iframe {
-        width: 1400px;               /* 🌟 زيادة العرض الداخلي ليتسع لكل المجموعات دون أي قص */
+        width: 1400px;
         flex-shrink: 0;              
-        transform: scale(0.65);      /* نسبة تصغير متناسبة لتوسيط الـ 1400 بكسل في شاشات الآيباد */
+        transform: scale(0.65);
         transform-origin: top center;
         height: 1100px;
     }
-    .project-container {
-        height: 750px;               
-    }
+    .project-container { height: 750px; }
 }
 
 @media (max-width: 768px) {
     iframe {
         width: 1400px;
         flex-shrink: 0;
-        transform: scale(0.48);      /* نسبة تصغير مخصصة لشاشات الجوال الكبيرة */
+        transform: scale(0.48);
         transform-origin: top center;
         height: 1300px;
     }
-    .project-container {
-        height: 650px;
-    }
+    .project-container { height: 650px; }
 }
 
 @media (max-width: 480px) {
     iframe {
-        width: 1400px;               /* الحفاظ على العرض الكلي ثابتاً لمنع اختفاء المجموعات 1 و 2 و 17 و 18 */
-        flex-shrink: 0;              
-        transform: scale(0.25);      /* 🌟 النسبة البرمجية الدقيقة لتصغير الـ 1400 بكسل بالكامل داخل شاشة الجوال الضيقة */
+        width: 1400px;
+        flex-shrink: 0;
+        transform: scale(0.25);
         transform-origin: top center;
-        height: 1800px;              /* زيادة الارتفاع الداخلي لتعويض فارق التصغير وظهور السلاسل السفلية كاملة */
+        height: 1800px;
     }
-    .project-container {
-        height: 500px;               /* الارتفاع الخارجي الفعلي للجدول على الشاشة لمنع الفراغ السفلي */
-    }
-}
-/* ابحث عن body وقم بتعديله ليصبح هكذا للسماح بالتمرير عند الحاجة للأسفل */
-body {
-  --header-height: 4rem;
-  display: flex;
-  flex-direction: column;
-  min-height: 100lvh;
-  overflow-y: auto; /* تم التعديل من hidden إلى auto لتتمكن من النزول للحقوق */
-  overflow-x: hidden;
+    .project-container { height: 500px; }
 }
 
-/* أضف هذا التنسيق في نهاية ملف ali.css لضمان ظهور الحقوق بشكل جميل وفي الأسفل */
 .ali-table-footer {
-  margin-top: auto; /* يدفع الحقوق لأسفل المحتوى */
-  width: 100%;
-  text-align: center;
-  padding: 15px 0;
-  background-color: transparent; /* إزالة الشريط الأسود عن النص */
-  color: #fff;
-  font-family: sans-serif;
-  font-size: 0.9rem;
-  z-index: 10; /* لضمان ظهورها فوق الطبقات الخلفية */
-  position: relative;
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    background-color: transparent;
+    color: var(--text-color);
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    z-index: 10;
+    position: relative;
+}
+
+/* تخصيصات الوضع الليلي البنفسجي لعناصر الصفحة الرئيسية */
+body.dark-mode hr {
+    background-image: linear-gradient(to right, rgba(206, 147, 216, 0), rgba(206, 147, 216, 0.55), rgba(206, 147, 216, 0));
+}
+
+body.dark-mode #result > p,
+body.dark-mode #additional-result > p {
+    color: #ce93d8;
+}
+
+body.dark-mode .dot {
+    background-color: #ce93d8;
+}
+
+body.dark-mode .compare-column h4 {
+    color: #ce93d8 !important;
+    border-bottom-color: #ce93d8 !important;
+}
+
+body.dark-mode .orbital-classification {
+    color: #6fe3a1;
+}
+
+body.dark-mode .theme-btn {
+    background-color: #2b1055;
+    color: #e1bee7;
+}
+
+body.dark-mode .theme-btn:hover {
+    background-color: #3c1e6e;
+}
+
+body.dark-mode #quiz-area {
+    background-color: #241239;
+    color: #e1bee7;
+    border: 1px solid #4b2a6d;
+}
+
+body.dark-mode .quiz-input {
+    background-color: #1d0e36;
+    border-color: #4b2a6d;
+    color: #f8f9fa;
+}
+
+body.dark-mode .close-button {
+    color: #e1bee7;
+}
+
+body.dark-mode .info-box {
+    background-color: #241239;
+    border-color: #9c27b0;
+    color: #e1bee7;
+}
+
+body.dark-mode .compare-column [style*="#28a745"] {
+    color: #6fe3a1 !important;
+}
+
+/* طريقة المربعات (الأفلاك) — الوضع الليلي: الأسهم بنفسجية */
+body.dark-mode .orbital-box {
+    color: #ce93d8;
+}
+
+/* طريقة المربعات + التمثيل النقطي — الوضع النهاري: المربع أبيض */
+body:not(.dark-mode) .orbital-box,
+body:not(.dark-mode) .lewis-dot-container {
+    background-color: #ffffff;
+}
+
+/* الاستجابة لتجاوبية بطاقة الليثيوم على الجوال */
+@media (max-width: 768px) {
+    .li-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .li-card-full-span {
+        grid-column: span 1;
+    }
+    .li-properties-grid,
+    .li-reaction-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .li-header-section {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .li-properties-grid,
+    .li-reaction-list {
+        grid-template-columns: 1fr;
+    }
+    .li-card-body-side {
+        flex-direction: column;
+        text-align: center;
+    }
+    .li-card-side-img {
+        width: 100%;
+        height: 140px;
+    }
 }

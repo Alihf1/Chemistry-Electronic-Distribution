@@ -8,6 +8,11 @@
 </head>
 <body>
     <div class="container">
+        <!-- زر التبديل بين الوضع الليلي والعادي -->
+        <div class="theme-toggle-container">
+            <button onclick="toggleDarkMode()" id="themeToggleBtn" class="theme-btn">🌙 الوضع الليلي</button>
+        </div>
+
         <h1>تطبيق التوزيع الإلكتروني</h1>
         <p>اختر عنصراً من الجدول الدوري أو أدخل العدد الذري يدوياً.</p>
         
@@ -23,19 +28,18 @@
         <div class="quiz-mode-toggle">
             <button onclick="toggleQuizMode()">وضع الاختبار: 🧪 <span id="quizStatus">إيقاف</span></button>
         </div>
-        <div id="quiz-area" class="hidden-quiz">
-            </div>
+        <div id="quiz-area" class="hidden-quiz"></div>
 
         <div id="periodic-table-container">                                                                     
             <h2>الجدول الدوري</h2>
             <div class="project-container">
-
-            <iframe src="Periodic_Table_Animation/index.html" title="Periodic_Table_Animation"></iframe>
-</div>
-            
+                <iframe id="periodicTableIframe" src="Periodic_Table_Animation/index.html" title="Periodic_Table_Animation"></iframe>
+            </div>
         </div>
+
         <div id="result"></div>
         <div id="additional-result"></div>
+        <div id="exampleResult"></div>
         
         <hr style="margin: 25px 0;">
         <h2>أداة المقارنة <span class="info-icon" onclick="showInfo('compare-tool-info')">ℹ️</span></h2>
@@ -48,29 +52,24 @@
             <button onclick="compareElements()">قارن</button>
         </div>
         <div id="compare-results"></div>
-
     </div>
 
     <div class="modal-overlay hidden" id="modalOverlay" onclick="hideModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-button" onclick="hideModal()">&times;</span>
+            <span class="close-button" onclick="hideModal()">×</span>
             <h3 id="modalTitle"></h3>
             <div id="modalBody"></div>
         </div>
     </div>
-    <script src="script.js"></script>
-    <footer style="text-align: center; padding: 20px; direction: ltr;">
-    </footer>
 
-
-        
-<footer class="ali-table-footer">
+    <footer class="ali-table-footer">
         <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
             <img src="logo.png" alt="TECHNOLOGY.ALI Logo" style="max-width: 30px; height: auto; border-radius: 50%; background-color: rgba(0, 0, 0, 0.5); padding: 4px;">
-            <p style="margin: 0;">© 2026 جميع الحقوق محفوظة لـ <strong>TECHNOLOGY.ALI</strong></p>
+            <p style="margin: 0;">© <span id="current-year">2026</span> جميع الحقوق محفوظة لـ <strong>TECHNOLOGY.ALI</strong></p>
         </div>
     </footer>
-</body>
-</html>
+
+    <script src="element-info.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

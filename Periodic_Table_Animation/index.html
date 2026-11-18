@@ -3,7 +3,22 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Anime.js Periodic Table Auto Layout animation</title><link rel="stylesheet" href="ali.css">
+    <title>Anime.js Periodic Table Auto Layout animation</title>
+    <script>
+      // تطبيق الوضع الليلي المحفوظ قبل رسم الصفحة لتفادي الوميض
+      try {
+        if (localStorage.getItem('theme') === 'dark') {
+          document.documentElement.classList.add('dark-mode');
+        }
+      } catch (e) {}
+      // الاستماع لرسائل تغيير الثيم القادمة من الصفحة الأبوية (iframe)
+      window.addEventListener('message', function (event) {
+        if (event.data && event.data.type === 'THEME_CHANGE') {
+          document.documentElement.classList.toggle('dark-mode', event.data.theme === 'dark');
+        }
+      });
+    </script>
+    <link rel="stylesheet" href="ali.css">
 
   </head>
     
@@ -11,7 +26,7 @@
   <div class="controls">
   <div class="controls-group display br">
     <button class="is-active toggle" id="table">table</button>
-    <button class="toggle" id="sphere">sphere</button> 
+    <button class="toggle" id="sphere">sphere</button>
     <button class="toggle" id="helix">helix</button>
     <button class="toggle" id="grid">grid</button>
   </div>
