@@ -683,7 +683,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 115, symbol: "Mc", name: "موسكوفيوم", type: "post-transition-metal" },
         { id: 116, symbol: "Lv", name: "ليفرموريوم", type: "post-transition-metal" },
         { id: 117, symbol: "Ts", name: "تنيسين", type: "halogen" },
-        { id: 118, symbol: "Og", name: "أوغانيسون", type: "noble-gas" }
+        { id: 118, symbol: "Og", name: "أوغانيسون", type: "noble-gas" },
     ];
 
     elementsData.forEach(el => {

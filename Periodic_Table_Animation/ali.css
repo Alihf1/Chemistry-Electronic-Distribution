@@ -191,7 +191,7 @@
 
   @font-face {
     font-family: 'IoskeleyMono';
-    src: url('https://assets.codepen.io/1137/IoskeleyMono-Regular.woff2') format('woff2');
+    src: url('./IoskeleyMono-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -199,7 +199,7 @@
 
   @font-face {
     font-family: 'IoskeleyMono';
-    src: url('https://assets.codepen.io/1137/IoskeleyMono-Bold.woff2') format('woff2');
+    src: url('./IoskeleyMono-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
